@@ -15,7 +15,7 @@ BOOLTERM = RELEXPRESSION, {"&&", RELEXPRESSION } ;
 RELEXPRESSION = EXPRESSION, { ("==" | ">" | "<") , EXPRESSION } ;
 EXPRESSION = TERM, { ("+" | "-"), TERM } ;
 TERM = FACTOR, { ("*" | "/" | "^" ), FACTOR } ;
-FACTOR = (("+" | "-" | "!"), FACTOR) | NUMBER | STRING | "(", BOOLEXPRESSION, ")" | IDENTIFIER | SCAN ;
+FACTOR = (("+" | "-" | "!"), FACTOR) | NUMBER | """ STRING """ | "(", BOOLEXPRESSION, ")" | IDENTIFIER | SCAN ;
 TYPE = ("int" | "string");
 IDENTIFIER = LETTER, { LETTER | DIGIT | "_" } ;
 NUMBER = DIGIT, { DIGIT } ;
