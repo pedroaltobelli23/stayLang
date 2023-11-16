@@ -1,0 +1,3 @@
+variable a string = "teste"
+Log(a)
+variable b int = scanf()

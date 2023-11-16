@@ -38,9 +38,9 @@ string_p: QUOTEMARK IDENTIFIER QUOTEMARK;
 
 assignment: IDENTIFIER EQUAL boolexpression;
 
-statement: assignment ENDL | print ENDL | if_stmt ENDL | during ENDL | declaration ENDL;
+statement: assignment ENDL | print_stmt ENDL | if_stmt ENDL | during ENDL | declaration ENDL;
 
-declaration: | VARIABLE IDENTIFIER type | VARIABLE IDENTIFIER type EQUAL boolexpression;
+declaration: VARIABLE IDENTIFIER type | VARIABLE IDENTIFIER type EQUAL boolexpression;
 
 if_stmt: IF boolexpression block | IF boolexpression block ELSE block;
 
@@ -56,11 +56,11 @@ expression: term | expression PLUS term | expression MINUS term;
 
 term: factor | term DIVIDE factor | term MULT factor | term POWER factor;
 
-factor: | PLUS factor | MINUS factor | NOT factor | INT | string_p | LPAR boolexpression RPAR | scan | IDENTIFIER;
+factor: PLUS factor | MINUS factor | NOT factor | INT | string_p | LPAR boolexpression RPAR | scan | IDENTIFIER;
 
-type: | INT_T | STRING_T;
+type: INT_T | STRING_T;
 
-print: PRINT LPAR expression RPAR;
+print_stmt: PRINT LPAR expression RPAR;
 
 scan: SCANF LPAR RPAR;
 %%
@@ -77,7 +77,7 @@ int main(int argc, char* argv[]) {
   
   // make sure it is valid:
   if (!myfile) {
-    cout << "I can't open a.staylang.file!" << endl;
+    cout << "I can't open .stay file!" << endl;
     return -1;
   }
 

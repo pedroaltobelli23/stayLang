@@ -1,0 +1,7 @@
+variable a int
+variable b int = 300
+a = 20
+if a < 10 [
+    b = 10
+]
+Log(b)

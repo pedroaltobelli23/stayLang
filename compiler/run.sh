@@ -1,6 +1,5 @@
 #!/bin/bash
 
-# Run commands
 bison -d staylang.y
 flex staylang.l
 
@@ -9,8 +8,22 @@ sed -i 's/#define YY_DECL int yylex (void)/#define YY_DECL extern "C" int yylex(
 
 g++ staylang.tab.c lex.yy.c -lfl -o staylang
 
-echo "OUTPUT:"
-./staylang a.staylang.file
+echo "staylang created!"
 
-# Remove files if they exist
-rm -f staylang.tab.c staylang.tab.h lex.yy.c staylang
+echo "Runnig tests:"
+
+script_folder="staylang_scripts"
+
+cd "$script_folder"
+
+for script in script*.stay; do
+    if [ -f "$script" ] && [ -r "$script" ]; then
+        echo "Running $script"
+        ../staylang "$script"
+    else
+        echo "Error: $script not found or not readable"
+    fi
+done
+
+cd ../
+rm -f staylang.tab.c staylang.tab.h lex.yy.c

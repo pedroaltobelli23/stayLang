@@ -1,0 +1,10 @@
+variable i int
+variable n int
+variable f int
+n = scanf()
+f = 1
+during ~n < 10~ [
+    f = f + 1
+    n = n + 1
+]
+Log(f)
