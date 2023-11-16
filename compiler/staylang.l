@@ -12,6 +12,7 @@
 if              { return IF; }
 else            { return ELSE; }
 during          { return DURING; }
+\"              { return QUOTEMARK; }
 "~"             { return TILDE; }
 "||"            { return OR; }
 "&&"            { return AND; }

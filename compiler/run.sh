@@ -10,7 +10,7 @@ sed -i 's/#define YY_DECL int yylex (void)/#define YY_DECL extern "C" int yylex(
 g++ staylang.tab.c lex.yy.c -lfl -o staylang
 
 echo "OUTPUT:"
-./staylang
+./staylang a.staylang.file
 
 # Remove files if they exist
 rm -f staylang.tab.c staylang.tab.h lex.yy.c staylang
