@@ -9,8 +9,8 @@
 "("             { return LPAR; }
 ")"             { return RPAR; }
 "="             { return EQUAL; }
-if              { return IF; }
-else            { return ELSE; }
+condition       { return IF; }
+otherway        { return ELSE; }
 during          { return DURING; }
 \"              { return QUOTEMARK; }
 "~"             { return TILDE; }

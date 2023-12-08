@@ -1,2 +1,3 @@
 variable a int
 a = 20
+Log(a)
