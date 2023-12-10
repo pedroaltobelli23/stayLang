@@ -123,14 +123,16 @@ class Parser:
             if self.tokens.next.type == IDENTIFIER:
                 name = self.tokens.next.value
                 self.tokens.selectNext()
-                if self.tokens.next.type in [T_INT,T_STRING]:
+                if self.tokens.next.type in [T_INT, T_STRING]:
                     variable_type = self.tokens.next.type
                     self.tokens.selectNext()
                     if self.tokens.next.type == EQUAL:
                         self.tokens.selectNext()
-                        variable = VarDec(variable_type,[name,self.parseBoolExpression()])
+                        variable = VarDec(
+                            variable_type, [name, self.parseBoolExpression()]
+                        )
                     elif self.tokens.next.type == EOF or self.tokens.next.type == END:
-                        variable = VarDec(variable_type,[name])
+                        variable = VarDec(variable_type, [name])
                         self.tokens.selectNext()
                     else:
                         raise Exception("Code is Incorrect")
@@ -147,6 +149,7 @@ class Parser:
                     if self.tokens.next.type == END:
                         self.tokens.selectNext()
                     else:
+                        print(self.tokens.next.type)
                         raise Exception("Code Incorrect")
                 else:
                     raise Exception("Code Incorrect")
@@ -172,7 +175,7 @@ class Parser:
         else:
             # print(self.tokens.next.type)
             raise Exception("Code Incorrect")
-        
+
         # print(self.tokens.next.type)
         return variable
 
@@ -193,7 +196,11 @@ class Parser:
 
     def parseTerm(self):
         node = self.parseFactor()
-        while self.tokens.next.type == TIMES or self.tokens.next.type == DIV or self.tokens.next.type == POT:
+        while (
+            self.tokens.next.type == TIMES
+            or self.tokens.next.type == DIV
+            or self.tokens.next.type == POT
+        ):
             if self.tokens.next.type == TIMES:
                 self.tokens.selectNext()
                 node = BinOp(TIMES, [node, self.parseFactor()])
@@ -215,7 +222,7 @@ class Parser:
             self.tokens.selectNext()
             if self.tokens.next.type == INT:
                 raise Exception("Code Incorrect")
-        elif self.tokens.next.type == STR: # String
+        elif self.tokens.next.type == STR:  # String
             node = StrVal(self.tokens.next.value, [])
             self.tokens.selectNext()
         elif self.tokens.next.type == IDENTIFIER:  # Identifier
@@ -241,7 +248,7 @@ class Parser:
             self.tokens.selectNext()
             if self.tokens.next.type == PAR_IN:
                 self.tokens.selectNext()
-                node = Scanln(SCAN,[])
+                node = Scanln(SCAN, [])
                 if self.tokens.next.type != PAR_OUT:
                     raise Exception("Code Incorrect")
                 self.tokens.selectNext()
@@ -261,9 +268,9 @@ class Parser:
         if self.tokens.next.type == EOF:
             for node in list_of_nodes:
                 node.Evaluate(identifier_table)
-            new_file = code.replace("stay","asm")
+            new_file = code.replace("stay", "asm")
             filename = new_file.split("/")
-            f = open(os.getcwd()+folder_to_dump+filename[-1],"w")
+            f = open(os.getcwd() + folder_to_dump + filename[-1], "w")
             f.write(Node.endcode())
             f.close()
         else:

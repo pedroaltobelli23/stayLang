@@ -19,7 +19,7 @@ script_folder="staylang_scripts"
 
 cd "$script_folder"
 
-for script in script*.stay; do
+for script in *.stay; do
     if [ -f "$script" ] && [ -r "$script" ]; then
         echo "Running $script"
         ../FlexBisonTokenizerAndParser/staylang "$script"

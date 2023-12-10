@@ -1,0 +1,4 @@
+variable a int = 10
+variable b int = 3
+variable power int = a^b
+Log(power)

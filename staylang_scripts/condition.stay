@@ -1,0 +1,12 @@
+variable a int
+a = 1
+
+
+condition a < 10 [
+    variable b int = a^4
+] otherway [
+    variable c int = a^3
+]
+
+
+Log(c)

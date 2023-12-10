@@ -38,7 +38,7 @@ string_p: QUOTEMARK IDENTIFIER QUOTEMARK;
 
 assignment: IDENTIFIER EQUAL boolexpression;
 
-statement: assignment ENDL | print_stmt ENDL | if_stmt ENDL | during ENDL | declaration ENDL;
+statement: assignment | assignment ENDL | print_stmt | print_stmt ENDL | if_stmt | if_stmt ENDL | during | during ENDL | declaration | declaration ENDL | ENDL;
 
 declaration: VARIABLE IDENTIFIER type | VARIABLE IDENTIFIER type EQUAL boolexpression;
 
@@ -50,7 +50,7 @@ boolexpression: boolterm | boolexpression OR boolterm;
 
 boolterm: relexpression | boolterm AND relexpression;
 
-relexpression: expression | relexpression EQUAL expression | relexpression GT expression | relexpression LT expression;
+relexpression: expression | relexpression EQ expression | relexpression GT expression | relexpression LT expression;
 
 expression: term | expression PLUS term | expression MINUS term;
 
@@ -91,7 +91,7 @@ int main(int argc, char* argv[]) {
 }
 
 void yyerror(const char *s) {
-  cout << "EEK, parse error on line " << line_num << "!  Message: " << s << endl;
+  cout << "Parse error on line " << line_num << "!  Message: " << s << endl;
   // might as well halt now:
   exit(-1);
 }

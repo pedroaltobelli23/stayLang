@@ -1,2 +1,0 @@
-variable b int = scanf()
-Log(b)

@@ -56,11 +56,15 @@ MOV EBP, ESP ; estabelece um novo base pointer
 
 
 PUSH DWORD 0
+MOV EAX, 15
+PUSH EAX
 PUSH scanint
 PUSH formatin
 call scanf
 ADD ESP, 8
 MOV EAX, DWORD [scanint]
+POP EBX
+ADD EAX, EBX
 MOV [EBP-4], EAX
 MOV EAX, [EBP-4]
 PUSH EAX

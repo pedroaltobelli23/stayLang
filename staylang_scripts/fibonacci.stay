@@ -1,0 +1,28 @@
+variable n int = scanf()
+variable a int = 0
+variable b int = 1
+variable i int = 1
+
+condition n<19 [
+    condition (n == 1) || (n==0) [
+        condition (n==1) [
+            Log(a)
+            Log(b)
+        ] otherway [
+            Log(a)
+        ]
+    ] otherway [
+        Log(a)
+        during ~i<n~ [
+            Log(b)
+            variable a_antigo int = a
+            a = b
+            b = a_antigo+b
+            i=i+1
+        ]
+    ]
+] otherway [
+    Log(n)
+]
+
+

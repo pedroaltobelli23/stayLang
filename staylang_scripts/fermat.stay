@@ -1,0 +1,29 @@
+variable n int = scanf()
+variable i int = 3
+variable x int = scanf()
+variable y int = scanf()
+variable z int = 4
+variable true int = 1
+variable false int = 0
+variable left int
+variable right int
+
+condition n < 3 [
+    Log(n)
+] otherway [
+    during ~i<n~ [
+        left= x^i + y^i
+        right=z^i
+        Log(left)
+        Log(right)
+        condition left==right [
+            Log(true)
+        ]otherway[
+            Log(false)
+        ]
+        i = i+1
+    ]
+]
+
+
+

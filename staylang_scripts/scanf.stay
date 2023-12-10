@@ -1,0 +1,2 @@
+variable b int = scanf() + 15
+Log(b)

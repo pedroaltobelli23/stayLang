@@ -50,26 +50,27 @@ class BinOp(Node):
                 Node.add_line("SUB EAX, EBX")
                 return (var2[0] - var1[0],"int")
             elif self.value == "*":
-                Node.add_line("IMUL EAX, EBX")
+                Node.add_line("MUL EBX")
                 return (var2[0] * var1[0],"int")
             elif self.value == "^":
-                #AQUI
                 if var1[0] == 0:
                     if var2[0] == 0:
                         raise Exception("cant make the operation 0^0")
                     Node.add_line("MOV EAX,1")
+                elif var1[0] == 1:
+                    Node.add_line("MOV EAX,EAX")
                 else:
                     power_label = f"POWER_{unique_id}"
                     Node.add_line("MOV ECX, EBX")
                     Node.add_line("SUB ECX, 1")
                     Node.add_line("MOV EBX, EAX")
                     Node.add_line(f"{power_label}:")
-                    Node.add_line("IMUL EAX, EBX")
+                    Node.add_line("MUL EBX")
                     Node.add_line("LOOP "+ power_label)
-                
                 return (var2[0]**var1[0],"int")
             elif self.value == "/":
-                Node.add_line("IDIV EAX, EBX")
+                Node.add_line("XOR EDX, EDX")
+                Node.add_line("DIV EBX")
                 return (var1[0] // var2[0],"int")
             elif self.value == "||":
                 Node.add_line("OR EAX, EBX")
@@ -101,6 +102,7 @@ class UnOp(Node):
             if self.value == "+":
                 return (1 * var[0] , var[1])
             elif self.value == "-":
+                Node.add_line("NEG EAX")
                 return (-1 * var[0],var[1])
             elif self.value == "!":
                 return (not (var[0]), var[1])
